@@ -44,6 +44,31 @@ The Rahu Presentation Generator is a Python-based tool designed to automate the 
    - Number of Slides: 5
    - Use Fresh Data: Checked
   
+   - ### **Clone the Repository**  
+Open your terminal or command prompt and run:  
+
+```bash
+git clone https://github.com/abdullahtarar3/Rahu-Presentation-Generater.git
+```
+
+### **Navigate to the Project Directory**  
+
+```bash
+cd Rahu-Presentation-Generater
+```
+
+
+### **Install Dependencies**  
+```bash
+pip install -r requirements.txt
+```
+
+### **Run the Application**  
+  
+```bash
+python Rahu.py
+```
+  
 **Developer Information**
 
 - **Developer**: Abdullah Tarar

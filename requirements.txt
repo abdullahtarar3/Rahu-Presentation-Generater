@@ -1,0 +1,5 @@
+python-pptx
+requests
+openai
+google-generativeai
+deepseek

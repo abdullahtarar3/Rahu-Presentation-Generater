@@ -2,3 +2,4 @@ python-pptx
 requests
 openai
 tk
+python-dotenv

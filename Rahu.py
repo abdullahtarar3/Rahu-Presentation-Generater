@@ -128,7 +128,7 @@ def generate_presentation():
             # Check if the response is empty
             if not response:
                 raise ValueError("Received empty response from Gemini API")
-
+            
         elif api_choice == "DeepSeek":
             from deepseek import DeepSeek
             client = DeepSeek(api_key)
@@ -137,6 +137,17 @@ def generate_presentation():
                 prompt=question,
                 max_tokens=128
             ).choices[0].text
+        elif api_choice == "Kimi":
+            from openai import Client
+            client = Client(
+                api_key=api_key,
+                base_url="https://api.moonshot.cn/v1",
+            )
+            completion = client.chat.completions.create(
+                model="moonshot-v1-8k",
+                messages=[{"role": "user", "content": prompt}]
+            )
+            response = completion.choices[0].message.content
         else:
             raise ValueError("Unsupported API choice")
 
@@ -255,7 +266,7 @@ fresh_data_checkbox.grid(row=7, column=0, sticky=tk.W, pady=5)
 # API choice label and dropdown
 ttk.Label(main_frame, text="Select API").grid(row=8, column=0, sticky=tk.W, pady=5)
 api_var = tk.StringVar(value="OpenAI")
-api_dropdown = ttk.Combobox(main_frame, textvariable=api_var, values=["OpenAI", "Gemini", "DeepSeek"], width=47)
+api_dropdown = ttk.Combobox(main_frame, textvariable=api_var, values=["OpenAI", "Gemini", "DeepSeek", "Kimi"], width=47)
 api_dropdown.grid(row=8, column=1, pady=5)
 
 # API Path label and entry
@@ -289,10 +300,26 @@ browse_output_button.grid(row=10, column=2, pady=5)
 # Generate button
 generate_button = ttk.Button(main_frame, text="Generate Presentation", command=generate_presentation)
 generate_button.grid(row=11, column=1, pady=20)
+import webbrowser
+# Function to open Instagram profile
+def open_instagram(event):
+    webbrowser.open("https://linktr.ee/abdullahtarar.3")
+
+# Function to open developer info page
+def open_dev_info(event):
+    webbrowser.open("https://linktr.ee/abdullahtarar.3")
 
 # Developer information
-developer_info = ttk.Label(main_frame, text="Developed by Abdullah Tarar, Insta: @Abdullahtarar.3", font=("Arial", 10))
+developer_info = ttk.Label(main_frame, text="Developed by Abdullah Tarar", font=("Arial", 10), foreground="blue", cursor="hand2")
 developer_info.grid(row=12, column=1, pady=10)
+developer_info.bind("<Button-1>", open_instagram)
+
+# Additional developer info
+more_info = ttk.Label(main_frame, text="Get more info about the developer", font=("Arial", 10), foreground="blue", cursor="hand2")
+more_info.grid(row=13, column=1, pady=5)
+more_info.bind("<Button-1>", open_dev_info)
+
+
 
 # Run the GUI loop
 root.mainloop()
